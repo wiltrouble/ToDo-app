@@ -71,38 +71,40 @@ function App() {
   return (
     <div>
       <TaskBanner username={username} taskItems={taskItems} ></TaskBanner>
-      <TaskCreator callback={createNewTask}></TaskCreator>
-      <table className="table table-striped table-border">
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Done</th>
-          </tr>
-        </thead>
-        <tbody>
-          {taskTableRows(false)}
-        </tbody>
-      </table>
-      <div className="bg-secondary text-white text-center p-2">
-        <VisibilityControl description="Completed tasks"
-          isChecked={showCompleted}
-          callback={checked => setShowCompleted(checked)}></VisibilityControl>
+      <div className="container">
+        <TaskCreator callback={createNewTask}></TaskCreator>
+        <table className="table table-striped table-border">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Done</th>
+            </tr>
+          </thead>
+          <tbody>
+            {taskTableRows(false)}
+          </tbody>
+        </table>
+        <div className="bg-secondary text-white text-center p-2">
+          <VisibilityControl description="Completed tasks"
+            isChecked={showCompleted}
+            callback={checked => setShowCompleted(checked)}></VisibilityControl>
+        </div>
+        {
+          showCompleted && (
+            <table className="table striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Done</th>
+                </tr>
+              </thead>
+              <tbody>
+                {taskTableRows(true)}
+              </tbody>
+            </table>
+          )
+        }
       </div>
-      {
-        showCompleted && (
-          <table className="table striped table-bordered">
-            <thead>
-              <tr>
-                <th>Description</th>
-                <th>Done</th>
-              </tr>
-            </thead>
-            <tbody>
-              {taskTableRows(true)}
-            </tbody>
-          </table>
-        )
-      }
     </div>
   );
 }
